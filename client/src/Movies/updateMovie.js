@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 const UpdateMovie = (props) => {
@@ -12,21 +12,26 @@ const UpdateMovie = (props) => {
 	 	stars: []
 	 })
 
+	useEffect(() => {
+		axios
+		.get(`http://localhost:5000/api/movies/${props.match.params.id}`)
+		.then((result) => {
+			console.log(result)
+			updateMovie(result.data)
+		})
+		.catch((error) => {
+			console.log(error)
+		})
+		// we're subscribing to the param, just in case it ever changes
+		// so it'll re-fetch with the new ID
+	}, [props.match.params.id])
+
  	const handleChange = (event) => {
 		updateMovie({
 			...movie,
 			[event.target.name]: event.target.value,
 		})
 	}
-
-	axios
-		.get('http://localhost:5000/api/movies')
-		.then((result) => {
-			console.log(result)
-		})
-		.catch((error) => {
-			console.log(error)
-		})
 
 	const handleSubmit = e => {
 		e.preventDefault();
