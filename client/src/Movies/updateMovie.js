@@ -29,13 +29,13 @@ const UpdateMovie = (props) => {
  	const handleChange = (event) => {
 		updateMovie({
 			...movie,
-			[event.target.name]: event.target.value,
+			[event.target.name]: [event.target.value],
 		})
 	}
 
 	const handleSubmit = e => {
 		e.preventDefault();
-console.log(movie)
+// console.log(movie)
 		axios 
  		.put(`http://localhost:5000/api/movies/${props.match.params.id}`, movie)
  		.then((result) => {
