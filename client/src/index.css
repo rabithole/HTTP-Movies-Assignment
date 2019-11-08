@@ -106,4 +106,7 @@ body {
   padding: 5px;
 }
 
+#deleteButton {
+  padding: 5px 30px;
 
+}
